@@ -1,0 +1,777 @@
+{
+  "id": "dc161646-f116-4501-ac3b-90bed04cca32",
+  "revision": 0,
+  "last_node_id": 33,
+  "last_link_id": 34,
+  "nodes": [
+    {
+      "id": 10,
+      "type": "CheckpointLoaderSimple",
+      "pos": [
+        -1146.9176025390625,
+        -481.11224365234375
+      ],
+      "size": [
+        270,
+        98
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            9
+          ]
+        },
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            10
+          ]
+        },
+        {
+          "label": "VAE",
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            19
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CheckpointLoaderSimple"
+      },
+      "widgets_values": [
+        "SDXL\\illustriousXL_v01.safetensors"
+      ]
+    },
+    {
+      "id": 18,
+      "type": "CR Apply LoRA Stack",
+      "pos": [
+        -785.6348266601562,
+        -441.5708923339844
+      ],
+      "size": [
+        157.06640625,
+        66
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 9
+        },
+        {
+          "label": "CLIP",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 10
+        },
+        {
+          "label": "LoRA堆",
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "label": "模型",
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            16
+          ]
+        },
+        {
+          "label": "CLIP",
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            11,
+            12
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR Apply LoRA Stack"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 25,
+      "type": "PreviewImage",
+      "pos": [
+        727.4210815429688,
+        -87.64764404296875
+      ],
+      "size": [
+        140,
+        246
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 21
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 30,
+      "type": "SPOUT WRITER (JOV_SPOUT)",
+      "pos": [
+        999.49462890625,
+        -719.4720458984375
+      ],
+      "size": [
+        303.6861267089844,
+        82
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE,MASK",
+          "link": 34
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SPOUT WRITER (JOV_SPOUT)"
+      },
+      "widgets_values": [
+        "HeightMap",
+        30
+      ]
+    },
+    {
+      "id": 32,
+      "type": "PreviewImage",
+      "pos": [
+        1051.742919921875,
+        -556.091064453125
+      ],
+      "size": [
+        140,
+        246
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "images",
+          "type": "IMAGE",
+          "link": 33
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 24,
+      "type": "SPOUT WRITER (JOV_SPOUT)",
+      "pos": [
+        950.7659912109375,
+        -181.0797576904297
+      ],
+      "size": [
+        303.6861267089844,
+        82
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "image",
+          "name": "image",
+          "type": "IMAGE,MASK",
+          "link": 20
+        }
+      ],
+      "outputs": [],
+      "properties": {
+        "Node name for S&R": "SPOUT WRITER (JOV_SPOUT)"
+      },
+      "widgets_values": [
+        "ColorMap",
+        30
+      ]
+    },
+    {
+      "id": 21,
+      "type": "KSamplerAdvanced",
+      "pos": [
+        142.46543884277344,
+        -400.7874755859375
+      ],
+      "size": [
+        304.748046875,
+        334
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "模型",
+          "name": "model",
+          "type": "MODEL",
+          "link": 16
+        },
+        {
+          "label": "正面条件",
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 14
+        },
+        {
+          "label": "负面条件",
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 15
+        },
+        {
+          "label": "Latent",
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "label": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSamplerAdvanced"
+      },
+      "widgets_values": [
+        "enable",
+        90877426739233,
+        "randomize",
+        15,
+        7,
+        "euler",
+        "karras",
+        0,
+        10000,
+        "disable"
+      ]
+    },
+    {
+      "id": 15,
+      "type": "CR LoRA Stack",
+      "pos": [
+        -1132.6419677734375,
+        -297.5664367675781
+      ],
+      "size": [
+        270,
+        342
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "LoRA堆",
+          "name": "lora_stack",
+          "shape": 7,
+          "type": "LORA_STACK",
+          "link": 13
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            8
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "On",
+        "illustroious\\Nahida_Illustrious.safetensors",
+        0.7000000000000002,
+        1,
+        "On",
+        "illustroious\\maid classic_illustrious_V1.0.safetensors",
+        0.7000000000000002,
+        1,
+        "On",
+        "illustroious\\xuegao-000007.safetensors",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 19,
+      "type": "CR LoRA Stack",
+      "pos": [
+        -1460.2340087890625,
+        -287.6065979003906
+      ],
+      "size": [
+        270,
+        342
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "LoRA堆",
+          "name": "lora_stack",
+          "shape": 7,
+          "type": "LORA_STACK",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "LORA_STACK",
+          "type": "LORA_STACK",
+          "links": [
+            13
+          ]
+        },
+        {
+          "name": "show_help",
+          "type": "STRING",
+          "links": null
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CR LoRA Stack"
+      },
+      "widgets_values": [
+        "On",
+        "illustroious\\glowinggownILL.safetensors",
+        1,
+        1,
+        "On",
+        "illustroious\\NNSemireal_Real_lL.safetensors",
+        1,
+        1,
+        "Off",
+        "None",
+        1,
+        1
+      ]
+    },
+    {
+      "id": 23,
+      "type": "VAEDecode",
+      "pos": [
+        490.2374267578125,
+        -280.8206787109375
+      ],
+      "size": [
+        140,
+        46
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "Latent",
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18
+        },
+        {
+          "label": "VAE",
+          "name": "vae",
+          "type": "VAE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            20,
+            21,
+            32
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "VAEDecode"
+      },
+      "widgets_values": []
+    },
+    {
+      "id": 33,
+      "type": "DepthAnythingV2Preprocessor",
+      "pos": [
+        663.1149291992188,
+        -399.9945373535156
+      ],
+      "size": [
+        292.8648376464844,
+        82
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "图像",
+          "name": "image",
+          "type": "IMAGE",
+          "link": 32
+        }
+      ],
+      "outputs": [
+        {
+          "label": "图像",
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            33,
+            34
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "DepthAnythingV2Preprocessor"
+      },
+      "widgets_values": [
+        "depth_anything_v2_vitl.pth",
+        1024
+      ]
+    },
+    {
+      "id": 16,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -569.0623779296875,
+        -448.19866943359375
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "CLIP",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 11
+        }
+      ],
+      "outputs": [
+        {
+          "label": "条件",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "anime, outdoors,  1girl, nahida_\\(genshin_impact\\), white_hair, maid_headdress, white_pantyhose, glowing_dress, blue_shoes, high quality, masterpiece",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#232",
+      "bgcolor": "#353"
+    },
+    {
+      "id": 22,
+      "type": "EmptyLatentImage",
+      "pos": [
+        -465.0187072753906,
+        41.87023162841797
+      ],
+      "size": [
+        270,
+        106
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "label": "Latent",
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "EmptyLatentImage"
+      },
+      "widgets_values": [
+        768,
+        1024,
+        1
+      ]
+    },
+    {
+      "id": 17,
+      "type": "CLIPTextEncode",
+      "pos": [
+        -566.8008422851562,
+        -208.4424591064453
+      ],
+      "size": [
+        400,
+        200
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "label": "CLIP",
+          "name": "clip",
+          "type": "CLIP",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "label": "条件",
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "embedding:BadDream, embedding:badhandv4, embedding:FastNegativeV2, ",
+        [
+          false,
+          true
+        ]
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
+    }
+  ],
+  "links": [
+    [
+      8,
+      15,
+      0,
+      18,
+      2,
+      "LORA_STACK"
+    ],
+    [
+      9,
+      10,
+      0,
+      18,
+      0,
+      "MODEL"
+    ],
+    [
+      10,
+      10,
+      1,
+      18,
+      1,
+      "CLIP"
+    ],
+    [
+      11,
+      18,
+      1,
+      16,
+      0,
+      "CLIP"
+    ],
+    [
+      12,
+      18,
+      1,
+      17,
+      0,
+      "CLIP"
+    ],
+    [
+      13,
+      19,
+      0,
+      15,
+      0,
+      "LORA_STACK"
+    ],
+    [
+      14,
+      16,
+      0,
+      21,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      15,
+      17,
+      0,
+      21,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      16,
+      18,
+      0,
+      21,
+      0,
+      "MODEL"
+    ],
+    [
+      17,
+      22,
+      0,
+      21,
+      3,
+      "LATENT"
+    ],
+    [
+      18,
+      21,
+      0,
+      23,
+      0,
+      "LATENT"
+    ],
+    [
+      19,
+      10,
+      2,
+      23,
+      1,
+      "VAE"
+    ],
+    [
+      20,
+      23,
+      0,
+      24,
+      0,
+      "IMAGE,MASK"
+    ],
+    [
+      21,
+      23,
+      0,
+      25,
+      0,
+      "IMAGE"
+    ],
+    [
+      32,
+      23,
+      0,
+      33,
+      0,
+      "IMAGE"
+    ],
+    [
+      33,
+      33,
+      0,
+      32,
+      0,
+      "IMAGE"
+    ],
+    [
+      34,
+      33,
+      0,
+      30,
+      0,
+      "IMAGE,MASK"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.18.9",
+    "node_versions": {
+      "comfy-core": "0.3.33",
+      "ComfyUI_Comfyroll_CustomNodes": "d78b780ae43fcf8c6b7c6505e6ffb4584281ceca",
+      "jovi_spout": "70135673bf64b2a7678a2520c2fdd637adb03deb",
+      "comfyui_controlnet_aux": "1e9eac6377c882da8bb360c7544607036904362c"
+    },
+    "VHS_latentpreview": false,
+    "VHS_latentpreviewrate": 0,
+    "VHS_MetadataImage": true,
+    "VHS_KeepIntermediate": true
+  },
+  "version": 0.4
+}
